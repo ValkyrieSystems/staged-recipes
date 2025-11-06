@@ -37,6 +37,7 @@ test:
     - pip
 
 about:
+  home: https://github.com/ValkyrieSystems/jbpy
   summary: Library for reading and writing Joint BIIF Profile (JBP) files (NITF and NSIF)
   license: MIT
   license_file: LICENSE
