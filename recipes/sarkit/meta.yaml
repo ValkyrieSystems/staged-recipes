@@ -1,0 +1,63 @@
+{% set name = "sarkit" %}
+{% set version = "1.3.0" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/sarkit-{{ version }}.tar.gz
+  sha256: e9e690bc8445cfedfe9587e22ae3c647e1981649ad16240867bf9985eed003a3
+
+build:
+  entry_points:
+    - cphdcheck = sarkit.verification._cphdcheck:main
+    - crsdcheck = sarkit.verification._crsdcheck:main
+    - sicdcheck = sarkit.verification._sicdcheck:main
+    - siddcheck = sarkit.verification._siddcheck:main
+    - cphdinfo = sarkit.cphd._cphdinfo:main
+    - crsdinfo = sarkit.crsd._crsdinfo:main
+    - sicdinfo = sarkit.sicd._sicdinfo:main
+    - siddinfo = sarkit.sidd._siddinfo:main
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+  number: 0
+
+requirements:
+  host:
+    - python >=3.11
+    - pdm-backend
+    - pip
+  run:
+    - python >=3.11
+    - jbpy >=0.2.0,<0.5
+    - lxml >=5.1.0
+    - numpy >=1.25.0
+    - shapely >=2.0.2
+
+test:
+  imports:
+    - sarkit
+  commands:
+    - pip check
+    - cphdcheck --help
+    - crsdcheck --help
+    - sicdcheck --help
+    - siddcheck --help
+    - cphdinfo --help
+    - crsdinfo --help
+    - sicdinfo --help
+    - siddinfo --help
+  requires:
+    - pip
+
+about:
+  summary: Suite of SAR-related tools in Python.
+  license: MIT
+  license_file: LICENSE
+
+extra:
+  recipe-maintainers:
+    - pressler-vsc
+    - bombaci-vsc
+    - johnstob
