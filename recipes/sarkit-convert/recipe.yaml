@@ -34,7 +34,7 @@ requirements:
     # Extra: iceye
     - h5py >=3.12.1  #
     # Extra: cosmo
-    - astropy >=6.0.0
+    - astropy-base >=6.0.0  # don't include optional astropy deps
     - shapely >=2.0.6  #
     # Extra: sentinel
     - tifffile >=2024.7.2
@@ -43,16 +43,26 @@ tests:
   - python:
       imports:
         - sarkit_convert
+        - sarkit_convert.cosmo
+        - sarkit_convert.create_arp_poly
+        - sarkit_convert.iceye
+        - sarkit_convert.sentinel
+        - sarkit_convert.sidd_metadata
+        - sarkit_convert.terrasar
       pip_check: true
       python_version: ${{ python_min }}.*
+  - script:
+    - python -m sarkit_convert.cosmo --help
+    - python -m sarkit_convert.iceye --help
+    - python -m sarkit_convert.sentinel --help
+    - python -m sarkit_convert.terrasar --help
 
 about:
   summary: Python library for converting SAR data to standard formats.
   license: MIT
-  license_file:
-    - LICENSE
-    - tests/core/data/sentinel_sicd_xml/LICENSE.txt
+  license_file: LICENSE
   homepage: https://pypi.org/project/sarkit-convert/
+  repository: https://github.com/ValkyrieSystems/sarkit-convert
 
 extra:
   recipe-maintainers:
