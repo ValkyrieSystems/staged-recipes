@@ -40,8 +40,17 @@ tests:
   - python:
       imports:
         - sarkit_processing
+        - sarkit_processing.atmosphere
+        - sarkit_processing.remocomp
+        - sarkit_processing.sicd_alias
+        - sarkit_processing.sicd_area_plane
+        - sarkit_processing.sicd_deskew
+        - sarkit_processing.sicd_pixel_type
+        - sarkit_processing.sicd_scene_to_image
       pip_check: true
-      python_version: ${{ python_min }}.*
+      python_version:
+        - ${{ python_min }}.*
+        - "*"
   - requirements:
       run:
         - pip
@@ -55,6 +64,7 @@ about:
   license: MIT
   license_file: LICENSE
   homepage: https://pypi.org/project/sarkit-processing/
+  repository: https://github.com/ValkyrieSystems/sarkit-processing
 
 extra:
   recipe-maintainers:
